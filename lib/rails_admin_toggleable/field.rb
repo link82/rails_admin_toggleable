@@ -5,10 +5,10 @@ module RailsAdmin
   module Config
     module Fields
       module Types
-        class Toggle < RailsAdmin::Config::Fields::Base
+        class Toggle < Base
           # Register field type for the type loader
           RailsAdmin::Config::Fields::Types::register(self)
-          include RailsAdmin::Engine.routes.url_helpers
+          #include RailsAdmin::Engine.routes.url_helpers
 
           register_instance_option :view_helper do
             :check_box
@@ -49,8 +49,7 @@ module RailsAdmin
             end
 
             def g_link(fv, on, badge)
-              options = { class: 'toggle-btn label ' + badge }
-
+              options = { class: 'toggle-btn' }
               if self.ajax
                 options[:onclick] = g_js
               else
@@ -59,7 +58,7 @@ module RailsAdmin
               end
 
               bindings[:view].link_to(
-                fv.html_safe,
+                "<span class='label #{badge}'>#{fv}</span>".html_safe,
                 bindings[:view].toggle_path(model_name: @abstract_model, id: bindings[:object].id, method: name, on: on.to_s),
                 options
               )

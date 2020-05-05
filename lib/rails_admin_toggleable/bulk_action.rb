@@ -1,7 +1,7 @@
 module RailsAdmin
   module Config
     module Actions
-      class BulkToggleBase < RailsAdmin::Config::Actions::Base
+      class BulkToggleBase < Base
         # Is the action acting on the root level (Example: /admin/contact)
         register_instance_option :collection? do
           true
@@ -20,7 +20,7 @@ module RailsAdmin
         end
       end
       
-      class BulkToggle < RailsAdmin::Config::Actions::BulkToggleBase
+      class BulkToggle < BulkToggleBase
         register_instance_option :controller do
           Proc.new do |klass|
             @objects = list_entries(@model_config, :toggle)
@@ -32,7 +32,7 @@ module RailsAdmin
           end
         end
       end
-      class BulkEnable < RailsAdmin::Config::Actions::BulkToggleBase
+      class BulkEnable < BulkToggleBase
         register_instance_option :controller do
           Proc.new do |klass|
             @objects = list_entries(@model_config, :toggle)
@@ -44,7 +44,7 @@ module RailsAdmin
           end
         end
       end
-      class BulkDisable < RailsAdmin::Config::Actions::BulkToggleBase
+      class BulkDisable < BulkToggleBase
         register_instance_option :controller do
           Proc.new do |klass|
             @objects = list_entries(@model_config, :toggle)
