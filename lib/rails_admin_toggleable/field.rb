@@ -33,9 +33,12 @@ module RailsAdmin
                   url: $t.attr("href"),
                   data: {ajax:true},
                   success: function(r) {
+                    $t.html("");
+                    $t.append("<span></span>");
+                    var $child = $($t.children("span")[0]);
+                    $child.attr("class", r.class);
+                    $child.text(r.text);
                     $t.attr("href", r.href);
-                    $t.attr("class", r.class);
-                    $t.text(r.text);
                     $t.parent().attr("title", r.text);
                     $t.siblings(".toggle-btn").remove();
                   },
